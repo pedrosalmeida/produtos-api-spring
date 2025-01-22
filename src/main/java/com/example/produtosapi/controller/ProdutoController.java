@@ -4,10 +4,8 @@ import com.example.produtosapi.model.Produto;
 import com.example.produtosapi.repository.ProdutoRepository;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
+import java.util.List;
 import java.util.UUID;
-
-import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 @RestController
 @RequestMapping("produtos")
@@ -52,6 +50,15 @@ public class ProdutoController {
 
         produto.setId(id);
         produtoRepository.save(produto);
+
+    }
+
+    @GetMapping
+    public List<Produto> buscar(@RequestParam("nome") String nome){
+
+        System.out.println("Nome buscado" + nome);
+       return produtoRepository.findByNome(nome);
+
 
     }
 }
